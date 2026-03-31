@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writer Dashboard - Book for Peace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+        }
+        
+        .write-form {
+            background: rgba(45, 27, 60, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .articles-list {
+            background: rgba(45, 27, 60, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+        
+        .article-item {
+            background: rgba(26, 11, 46, 0.8);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #f1c40f;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <h1><i class="fas fa-edit"></i> Writer Dashboard</h1>
+        
+        <div class="write-form">
+            <h2>Write New Article</h2>
+            <form id="articleForm">
+                <div class="form-group">
+                    <label>Article Title</label>
+                    <input type="text" id="articleTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Excerpt (Short Summary)</label>
+                    <textarea id="articleExcerpt" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Full Content</label>
+                    <textarea id="articleContent" rows="6" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" id="articleImage" placeholder="https://images.pexels.com/...">
+                </div>
+                <button type="submit" class="submit-btn">Publish Article</button>
+            </form>
+        </div>
+        
+        <div class="articles-list">
+            <h2>Your Published Articles</h2>
+            <div id="articlesList"></div>
+        </div>
+    </div>
+    
+    <script>
+        let articles = [];
+        
+        function loadArticles() {
+            const stored = localStorage.getItem('magazineArticles');
+            if (stored) {
+                articles = JSON.parse(stored);
+            }
+            displayArticles();
+        }
+        
+        function displayArticles() {
+            const container = document.getElementById('articlesList');
+            if (articles.length === 0) {
+                container.innerHTML = '<p>No articles yet. Write your first peace article!</p>';
+                return;
+            }
+            
+            container.innerHTML = articles.map(article => `
+                <div class="article-item">
+                    <div>
+                        <strong>${article.title}</strong>
+                        <small>${new Date(article.date).toLocaleDateString()}</small>
+                    </div>
+                    <button class="btn-delete" onclick="deleteArticle(${article.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+        
+        function saveArticle(article) {
+            articles.unshift(article);
+            localStorage.setItem('magazineArticles', JSON.stringify(articles));
+            displayArticles();
+        }
+        
+        function deleteArticle(id) {
+            articles = articles.filter(a => a.id !== id);
+            localStorage.setItem('magazineArticles', JSON.stringify(articles));
+            displayArticles();
+        }
+        
+        document.getElementById('articleForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const newArticle = {
+                id: Date.now(),
+                title: document.getElementById('articleTitle').value,
+                excerpt: document.getElementById('articleExcerpt').value,
+                content: document.getElementById('articleContent').value,
+                image: document.getElementById('articleImage').value || 'https://images.pexels.com/photos/3466702/pexels-photo-3466702.jpeg',
+                author: 'Writer',
+                date: new Date().toISOString()
+            };
+            
+            saveArticle(newArticle);
+            e.target.reset();
+            alert('✅ Article published successfully!');
+        });
+        
+        loadArticles();
+    </script>
+</body>
+</html>
