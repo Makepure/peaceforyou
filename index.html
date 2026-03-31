@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book for Peace - Ethiopian & Black American Unity</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Modern Vector Background -->
+    <div class="vector-bg">
+        <div class="vector-shape shape-1"></div>
+        <div class="vector-shape shape-2"></div>
+        <div class="vector-shape shape-3"></div>
+        <div class="vector-shape shape-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Book for Peace</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#share">Share Peace</a></li>
+                <li><a href="#messages">Messages</a></li>
+                <li><a href="#magazine">Magazine</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="animate-text">We do not wait for peace.</h1>
+            <h1 class="highlight animate-delay">We make it.</h1>
+            <p class="subtitle">Ethiopia 🤝 Black America | United for Peace</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openShareModal()">
+                    <i class="fas fa-feather-alt"></i> Share Your Peace
+                </button>
+                <button class="btn-secondary" onclick="openAIGuide()">
+                    <i class="fas fa-robot"></i> Peace Guide (AI)
+                </button>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#2d1b3c" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Share Modal (Complete Form) -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeShareModal()">&times;</span>
+            <h2><i class="fas fa-feather-alt"></i> Share Your Peace</h2>
+            <form id="peaceForm">
+                <!-- Message Type -->
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Message Type *</label>
+                    <select id="peaceType" required>
+                        <option value="personal">👤 Personal Peace</option>
+                        <option value="couple">💑 Couple's Peace</option>
+                        <option value="family">👨👩👧👦 Family Peace</option>
+                        <option value="group">👥 Group/Community Peace</option>
+                        <option value="capsule">⏰ Time Capsule</option>
+                    </select>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="fullName" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email *</label>
+                        <input type="email" id="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone (Optional)</label>
+                        <input type="tel" id="phone" placeholder="Your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> Age</label>
+                        <input type="number" id="age" placeholder="Your age">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-venus-mars"></i> Gender</label>
+                        <select id="gender">
+                            <option value="">Prefer not to say</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="non-binary">Non-binary</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-globe"></i> Country</label>
+                        <input type="text" id="country" placeholder="Your country">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-language"></i> Preferred Language</label>
+                    <select id="language">
+                        <option value="english">English</option>
+                        <option value="amharic">Amharic</option>
+                        <option value="oromo">Oromo</option>
+                        <option value="tigrinya">Tigrinya</option>
+                        <option value="french">French</option>
+                        <option value="spanish">Spanish</option>
+                    </select>
+                </div>
+
+                <!-- Dynamic Fields (Family Members, Group Members) -->
+                <div id="dynamicFields"></div>
+
+                <!-- Message Content -->
+                <div class="form-group">
+                    <label><i class="fas fa-message"></i> Your Peace Message *</label>
+                    <textarea id="messageContent" rows="5" placeholder="Share your peace message, story, prayer, or reflection..." required></textarea>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Add Image (Optional)</label>
+                    <input type="file" id="imageUpload" accept="image/*">
+                    <div id="imagePreview"></div>
+                </div>
+
+                <!-- Audio Upload (You provide MP3) -->
+                <div class="form-group">
+                    <label><i class="fas fa-music"></i> Attach Audio (Optional - MP3)</label>
+                    <input type="file" id="audioUpload" accept="audio/mp3">
+                    <div id="audioPreview"></div>
+                </div>
+
+                <!-- Time Capsule Fields (shown only when capsule selected) -->
+                <div id="capsuleFields" style="display:none;">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> Open Date</label>
+                        <input type="datetime-local" id="capsuleDate">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope-open-text"></i> Notification Email (for when capsule opens)</label>
+                        <input type="email" id="capsuleEmail" placeholder="Email to notify when capsule opens">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Release to the Sky
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Peace Guide Modal -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content ai-modal">
+            <span class="close" onclick="closeAIModal()">&times;</span>
+            <h2><i class="fas fa-robot"></i> Peace Guide AI</h2>
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages">
+                    <div class="ai-message">
+                        <i class="fas fa-robot"></i> Hello! I'm your Peace Guide. How can I support you today?
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Ask me about peace, meditation, conflict resolution...">
+                    <button onclick="sendToGroq()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Grid -->
+    <section id="messages" class="messages-section">
+        <div class="container">
+            <h2><i class="fas fa-star-of-life"></i> Recent Lights of Peace</h2>
+            <div id="messagesGrid" class="messages-grid"></div>
+            <button class="view-all" onclick="loadAllMessages()">View All Messages →</button>
+        </div>
+    </section>
+
+    <!-- Magazine Section (Your Writing) -->
+    <section id="magazine" class="magazine-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-newspaper"></i> Peace Magazine</h2>
+                <a href="magazine-editor.html" class="editor-link"><i class="fas fa-edit"></i> Writer Dashboard</a>
+            </div>
+            <div id="magazineGrid" class="magazine-grid"></div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Free Peace Courses</h2>
+            <div class="courses-grid" id="coursesGrid"></div>
+        </div>
+    </section>
+
+    <!-- YouTube Gallery -->
+    <section class="youtube-section">
+        <div class="container">
+            <h2><i class="fab fa-youtube"></i> Peace Voices</h2>
+            <div class="youtube-grid">
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/3pD8JqNxWgI" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/4vL5M-PvI_c" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/5pD9KqOxWgI" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Connect -->
+    <section class="social-section">
+        <div class="container">
+            <h2><i class="fas fa-share-alt"></i> Join the Movement</h2>
+            <div class="social-links">
+                <a href="https://facebook.com/yourpage" target="_blank" class="social-card facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook Community</span>
+                </a>
+                <a href="https://tiktok.com/@yourhandle" target="_blank" class="social-card tiktok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok Peace</span>
+                </a>
+                <a href="https://t.me/yourchannel" target="_blank" class="social-card telegram">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram Channel</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-book-open"></i> Book for Peace</h3>
+                <p>Building bridges between Ethiopia and Black America through peace, love, and unity.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#share">Share Peace</a></li>
+                    <li><a href="#messages">Peace Messages</a></li>
+                    <li><a href="#magazine">Magazine</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Peace Toolkit</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p>Get peace stories and updates</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Book for Peace | Ethiopian & Black American Unity | All Peace Matters</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
