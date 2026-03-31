@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book for Peace - Ethiopian & Black American Unity</title>
+    <title>መጽሐፈ ኢትዮጵያ | Book for Peace - Collective Ethiopian Wisdom</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,15 +22,16 @@
         <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-book-open"></i>
-                <span>Book for Peace</span>
+                <span>መጽሐፈ ኢትዮጵያ</span>
+                <small>Book for Peace</small>
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#share">Share Peace</a></li>
-                <li><a href="#messages">Messages</a></li>
-                <li><a href="#magazine">Magazine</a></li>
-                <li><a href="#courses">Courses</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#share">ጻፍ | Write</a></li>
+                <li><a href="#messages">ንባብ | Read</a></li>
+                <li><a href="#magazine">መጽሔት | Magazine</a></li>
+                <li><a href="#courses">ትምህርት | Courses</a></li>
+                <li><a href="#contact">አግኙን | Contact</a></li>
             </ul>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -41,15 +42,15 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="animate-text">We do not wait for peace.</h1>
-            <h1 class="highlight animate-delay">We make it.</h1>
-            <p class="subtitle">Ethiopia 🤝 Black America | United for Peace</p>
+            <h1 class="animate-text">እኛ ሰላምን አንጠብቅም።</h1>
+            <h1 class="highlight animate-delay">እኛ እንሠራዋለን።</h1>
+            <p class="subtitle">የኢትዮጵያ ሕዝባዊ መጽሐፍ | Ethiopia's People's Book</p>
             <div class="hero-buttons">
                 <button class="btn-primary" onclick="openShareModal()">
-                    <i class="fas fa-feather-alt"></i> Share Your Peace
+                    <i class="fas fa-feather-alt"></i> አሻራዎን ያስፍሩ | Share Your Peace
                 </button>
                 <button class="btn-secondary" onclick="openAIGuide()">
-                    <i class="fas fa-robot"></i> Peace Guide (AI)
+                    <i class="fas fa-robot"></i> የሰላም መሪ | Peace Guide
                 </button>
             </div>
         </div>
@@ -60,112 +61,111 @@
         </div>
     </section>
 
-    <!-- Share Modal (Complete Form) -->
+    <!-- Share Modal - Complete Form -->
     <div id="shareModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeShareModal()">&times;</span>
-            <h2><i class="fas fa-feather-alt"></i> Share Your Peace</h2>
+            <h2><i class="fas fa-feather-alt"></i> አሻራዎን ያስፍሩ | Add Your Legacy</h2>
+            <p class="modal-subtitle">ለመጽሐፈ ኢትዮጵያ አሻራዎን ይጨምሩ | Be part of Ethiopia's living book</p>
+            
             <form id="peaceForm">
                 <!-- Message Type -->
                 <div class="form-group">
-                    <label><i class="fas fa-tag"></i> Message Type *</label>
+                    <label><i class="fas fa-tag"></i> የአሻራ ዓይነት | Message Type *</label>
                     <select id="peaceType" required>
-                        <option value="personal">👤 Personal Peace</option>
-                        <option value="couple">💑 Couple's Peace</option>
-                        <option value="family">👨👩👧👦 Family Peace</option>
-                        <option value="group">👥 Group/Community Peace</option>
-                        <option value="capsule">⏰ Time Capsule</option>
+                        <option value="personal">👤 የግል ምስክርነት | Personal Testimony</option>
+                        <option value="couple">💑 የባልና ሚስት | Couple's Wisdom</option>
+                        <option value="family">👨👩👧👦 የቤተሰብ | Family Legacy</option>
+                        <option value="group">👥 የማህበረሰብ | Community Voice</option>
+                        <option value="capsule">⏰ የጊዜ ሳጥን | Time Capsule</option>
                     </select>
                 </div>
 
                 <!-- Personal Information -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label><i class="fas fa-user"></i> Full Name *</label>
-                        <input type="text" id="fullName" placeholder="Your name" required>
+                        <label><i class="fas fa-user"></i> ሙሉ ስም | Full Name *</label>
+                        <input type="text" id="fullName" placeholder="ስምዎ | Your name" required>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-envelope"></i> Email *</label>
+                        <label><i class="fas fa-envelope"></i> ኢሜይል | Email *</label>
                         <input type="email" id="email" placeholder="your@email.com" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Phone (Optional)</label>
-                        <input type="tel" id="phone" placeholder="Your phone number">
+                        <label><i class="fas fa-phone"></i> ስልክ | Phone</label>
+                        <input type="tel" id="phone" placeholder="ስልክ ቁጥር">
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-calendar"></i> Age</label>
-                        <input type="number" id="age" placeholder="Your age">
+                        <label><i class="fas fa-calendar"></i> ዕድሜ | Age</label>
+                        <input type="number" id="age" placeholder="ዕድሜዎ">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label><i class="fas fa-venus-mars"></i> Gender</label>
+                        <label><i class="fas fa-venus-mars"></i> ጾታ | Gender</label>
                         <select id="gender">
-                            <option value="">Prefer not to say</option>
-                            <option value="female">Female</option>
-                            <option value="male">Male</option>
-                            <option value="non-binary">Non-binary</option>
+                            <option value="">አልገልጽም | Prefer not to say</option>
+                            <option value="female">ሴት | Female</option>
+                            <option value="male">ወንድ | Male</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-globe"></i> Country</label>
-                        <input type="text" id="country" placeholder="Your country">
+                        <label><i class="fas fa-globe"></i> አገር | Country</label>
+                        <input type="text" id="country" placeholder="ኢትዮጵያ | Ethiopia">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label><i class="fas fa-language"></i> Preferred Language</label>
+                    <label><i class="fas fa-language"></i> ቋንቋ | Language</label>
                     <select id="language">
+                        <option value="amharic">አማርኛ | Amharic</option>
                         <option value="english">English</option>
-                        <option value="amharic">Amharic</option>
-                        <option value="oromo">Oromo</option>
-                        <option value="tigrinya">Tigrinya</option>
-                        <option value="french">French</option>
-                        <option value="spanish">Spanish</option>
+                        <option value="oromo">Afaan Oromoo</option>
+                        <option value="tigrinya">ትግርኛ | Tigrinya</option>
                     </select>
                 </div>
 
-                <!-- Dynamic Fields (Family Members, Group Members) -->
+                <!-- Dynamic Fields -->
                 <div id="dynamicFields"></div>
 
                 <!-- Message Content -->
                 <div class="form-group">
-                    <label><i class="fas fa-message"></i> Your Peace Message *</label>
-                    <textarea id="messageContent" rows="5" placeholder="Share your peace message, story, prayer, or reflection..." required></textarea>
+                    <label><i class="fas fa-message"></i> መልዕክትዎ | Your Message *</label>
+                    <textarea id="messageContent" rows="6" placeholder="ለሀገር፣ ለትውልድ የሚሆን መልዕክትዎን ይጻፉ | Write your message for Ethiopia and future generations..." required></textarea>
                 </div>
 
                 <!-- Image Upload -->
                 <div class="form-group">
-                    <label><i class="fas fa-image"></i> Add Image (Optional)</label>
+                    <label><i class="fas fa-image"></i> ምስል | Add Image</label>
                     <input type="file" id="imageUpload" accept="image/*">
                     <div id="imagePreview"></div>
                 </div>
 
-                <!-- Audio Upload (You provide MP3) -->
+                <!-- Audio Upload -->
                 <div class="form-group">
-                    <label><i class="fas fa-music"></i> Attach Audio (Optional - MP3)</label>
+                    <label><i class="fas fa-music"></i> ድምጽ | Add Audio (MP3)</label>
                     <input type="file" id="audioUpload" accept="audio/mp3">
                     <div id="audioPreview"></div>
                 </div>
 
-                <!-- Time Capsule Fields (shown only when capsule selected) -->
+                <!-- Time Capsule Fields -->
                 <div id="capsuleFields" style="display:none;">
                     <div class="form-group">
-                        <label><i class="fas fa-calendar-alt"></i> Open Date</label>
+                        <label><i class="fas fa-calendar-alt"></i> የሚከፈትበት ቀን | Open Date</label>
                         <input type="datetime-local" id="capsuleDate">
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-envelope-open-text"></i> Notification Email (for when capsule opens)</label>
+                        <label><i class="fas fa-envelope-open-text"></i> የማሳወቂያ ኢሜይል | Notification Email</label>
                         <input type="email" id="capsuleEmail" placeholder="Email to notify when capsule opens">
                     </div>
                 </div>
 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Release to the Sky
+                    <i class="fas fa-paper-plane"></i> መጽሐፉ ላይ ጨምር | Add to the Book
                 </button>
             </form>
         </div>
@@ -175,57 +175,61 @@
     <div id="aiModal" class="modal">
         <div class="modal-content ai-modal">
             <span class="close" onclick="closeAIModal()">&times;</span>
-            <h2><i class="fas fa-robot"></i> Peace Guide AI</h2>
+            <h2><i class="fas fa-robot"></i> የሰላም መሪ | Peace Guide AI</h2>
             <div class="chat-container">
                 <div id="chatMessages" class="chat-messages">
                     <div class="ai-message">
-                        <i class="fas fa-robot"></i> Hello! I'm your Peace Guide. How can I support you today?
+                        <i class="fas fa-robot"></i> ሰላም! እንዴት ልርዳዎ እችላለሁ? | Hello! How can I help you with peace, wisdom, or your contribution to our book?
                     </div>
                 </div>
                 <div class="chat-input">
-                    <input type="text" id="chatInput" placeholder="Ask me about peace, meditation, conflict resolution...">
+                    <input type="text" id="chatInput" placeholder="ማንኛውንም ነገር ይጠይቁ | Ask anything about peace, Ethiopia, or writing...">
                     <button onclick="sendToGroq()"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Messages Grid -->
+    <!-- Messages Grid - Book of Ethiopia -->
     <section id="messages" class="messages-section">
         <div class="container">
-            <h2><i class="fas fa-star-of-life"></i> Recent Lights of Peace</h2>
+            <h2><i class="fas fa-book-open"></i> መጽሐፈ ኢትዮጵያ | The Living Book</h2>
+            <p class="section-desc">የኢትዮጵያ ሕዝብ ጥበብ - ቃላችን ለትውልድ | Ethiopian wisdom passed to generations</p>
             <div id="messagesGrid" class="messages-grid"></div>
-            <button class="view-all" onclick="loadAllMessages()">View All Messages →</button>
+            <button class="view-all" onclick="loadAllMessages()">ሁሉንም ይመልከቱ | View All →</button>
         </div>
     </section>
 
-    <!-- Magazine Section (Your Writing) -->
+    <!-- Magazine Section - Your Writings -->
     <section id="magazine" class="magazine-section">
         <div class="container">
             <div class="section-header">
-                <h2><i class="fas fa-newspaper"></i> Peace Magazine</h2>
-                <a href="magazine-editor.html" class="editor-link"><i class="fas fa-edit"></i> Writer Dashboard</a>
+                <h2><i class="fas fa-newspaper"></i> የሰላም መጽሔት | Peace Magazine</h2>
+                <a href="magazine-editor.html" class="editor-link"><i class="fas fa-edit"></i> ጸሐፊ ፓነል | Writer Dashboard</a>
             </div>
             <div id="magazineGrid" class="magazine-grid"></div>
         </div>
     </section>
 
-    <!-- Courses Section -->
+    <!-- Courses Section - Text Only -->
     <section id="courses" class="courses-section">
         <div class="container">
-            <h2><i class="fas fa-graduation-cap"></i> Free Peace Courses</h2>
+            <h2><i class="fas fa-graduation-cap"></i> ነፃ የሰላም ትምህርቶች | Free Peace Courses</h2>
             <div class="courses-grid" id="coursesGrid"></div>
         </div>
     </section>
 
-    <!-- YouTube Gallery -->
+    <!-- YouTube Info Section -->
     <section class="youtube-section">
         <div class="container">
-            <h2><i class="fab fa-youtube"></i> Peace Voices</h2>
-            <div class="youtube-grid">
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/3pD8JqNxWgI" frameborder="0" allowfullscreen></iframe>
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/4vL5M-PvI_c" frameborder="0" allowfullscreen></iframe>
-                <iframe width="100%" height="250" src="https://www.youtube.com/embed/5pD9KqOxWgI" frameborder="0" allowfullscreen></iframe>
+            <h2><i class="fab fa-youtube"></i> የሰላም ቪዲዮዎች | Peace Videos</h2>
+            <div class="youtube-info">
+                <div class="info-card">
+                    <i class="fas fa-video"></i>
+                    <h3>በቅርቡ ይመጣል | Coming Soon</h3>
+                    <p>የሰላም ቃለመጠይቆች፣ ታሪኮች እና መልዕክቶች እዚህ ይቀርባሉ</p>
+                    <p class="small">Peace talks, interviews, and stories will be featured here</p>
+                </div>
             </div>
         </div>
     </section>
@@ -233,19 +237,19 @@
     <!-- Social Media Connect -->
     <section class="social-section">
         <div class="container">
-            <h2><i class="fas fa-share-alt"></i> Join the Movement</h2>
+            <h2><i class="fas fa-share-alt"></i> ይቀላቀሉን | Join the Movement</h2>
             <div class="social-links">
-                <a href="https://facebook.com/yourpage" target="_blank" class="social-card facebook">
+                <a href="https://web.facebook.com/kibrethiopia" target="_blank" class="social-card facebook">
                     <i class="fab fa-facebook-f"></i>
-                    <span>Facebook Community</span>
+                    <span>Facebook ገጻችን</span>
                 </a>
-                <a href="https://tiktok.com/@yourhandle" target="_blank" class="social-card tiktok">
-                    <i class="fab fa-tiktok"></i>
-                    <span>TikTok Peace</span>
-                </a>
-                <a href="https://t.me/yourchannel" target="_blank" class="social-card telegram">
+                <a href="https://t.me/bookforpeace" target="_blank" class="social-card telegram">
                     <i class="fab fa-telegram"></i>
-                    <span>Telegram Channel</span>
+                    <span>Telegram ቻናል</span>
+                </a>
+                <a href="https://kibrethiopia.wixsite.com/website" target="_blank" class="social-card website">
+                    <i class="fas fa-globe"></i>
+                    <span>ድህረ ገጻችን</span>
                 </a>
             </div>
         </div>
@@ -255,49 +259,48 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3><i class="fas fa-book-open"></i> Book for Peace</h3>
-                <p>Building bridges between Ethiopia and Black America through peace, love, and unity.</p>
+                <h3><i class="fas fa-book-open"></i> መጽሐፈ ኢትዮጵያ</h3>
+                <p>የኢትዮጵያ ሕዝብ የጋራ መጽሐፍ - ጥበባችንን ለትውልድ የምናስተላልፍበት</p>
+                <p class="quote">"አብረን እንጻፍ | Let's write together"</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://web.facebook.com/kibrethiopia" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://t.me/bookforpeace" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             
             <div class="footer-section">
-                <h3>Quick Links</h3>
+                <h3>ፈጣን አገናኞች | Quick Links</h3>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#share">Share Peace</a></li>
-                    <li><a href="#messages">Peace Messages</a></li>
-                    <li><a href="#magazine">Magazine</a></li>
-                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#home">መነሻ | Home</a></li>
+                    <li><a href="#share">አሻራ ያስፍሩ | Contribute</a></li>
+                    <li><a href="#messages">መጽሐፉን ያንብቡ | Read the Book</a></li>
+                    <li><a href="#magazine">መጽሔት | Magazine</a></li>
+                    <li><a href="#courses">ትምህርቶች | Courses</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h3>Resources</h3>
+                <h3>ስለ እኛ | About Us</h3>
                 <ul>
-                    <li><a href="#">Peace Toolkit</a></li>
-                    <li><a href="#">Volunteer</a></li>
-                    <li><a href="#">Donate</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">ዓላማችን | Our Mission</a></li>
+                    <li><a href="#">ተሳታፊዎች | Contributors</a></li>
+                    <li><a href="#">ይቀላቀሉ | Volunteer</a></li>
+                    <li><a href="#">ግላዊነት | Privacy Policy</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h3>Newsletter</h3>
+                <h3>ዜና መጽሔት | Newsletter</h3>
                 <form id="newsletterForm">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit">Subscribe</button>
+                    <input type="email" placeholder="ኢሜይልዎ | Your email" required>
+                    <button type="submit">ይመዝገቡ | Subscribe</button>
                 </form>
-                <p>Get peace stories and updates</p>
+                <p>የሰላም ዜናዎችን ያግኙ | Get peace updates</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 Book for Peace | Ethiopian & Black American Unity | All Peace Matters</p>
+            <p>© 2024 መጽሐፈ ኢትዮጵያ | Book for Peace | አብረን እንጻፍ | Written by Ethiopians, for generations</p>
         </div>
     </footer>
 
