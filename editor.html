@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Writer Dashboard - Book for Peace</title>
+    <title>ጸሐፊ ፓነል | Writer Dashboard - መጽሐፈ ኢትዮጵያ</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,75 +14,137 @@
         }
         
         .write-form {
-            background: rgba(45, 27, 60, 0.9);
+            background: rgba(45, 27, 60, 0.95);
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 25px;
             margin-bottom: 2rem;
+            border: 1px solid rgba(155, 89, 182, 0.5);
         }
         
         .articles-list {
-            background: rgba(45, 27, 60, 0.9);
+            background: rgba(45, 27, 60, 0.95);
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(155, 89, 182, 0.5);
         }
         
         .article-item {
             background: rgba(26, 11, 46, 0.8);
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             margin-bottom: 1rem;
-            border-radius: 10px;
+            border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         
         .btn-delete {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 5px 15px;
-            border-radius: 5px;
+            padding: 6px 18px;
+            border-radius: 30px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-delete:hover {
+            background: #c0392b;
+            transform: scale(1.05);
         }
         
         .back-link {
             display: inline-block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: #f1c40f;
             text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        h1 i {
+            color: #f1c40f;
+            margin-right: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            color: #d4c4b0;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(26, 11, 46, 0.8);
+            border: 1px solid #9b59b6;
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+        
+        .no-articles {
+            text-align: center;
+            padding: 2rem;
+            color: #d4c4b0;
         }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
-        <h1><i class="fas fa-edit"></i> Writer Dashboard</h1>
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> ወደ ዋና ገጽ | Back to Home</a>
+        <h1><i class="fas fa-edit"></i> ጸሐፊ ፓነል | Writer Dashboard</h1>
+        <p class="section-desc">አዳዲስ ጽሑፎችን ይጨምሩ፣ ያስተዳድሩ | Add and manage your peace articles</p>
         
         <div class="write-form">
-            <h2>Write New Article</h2>
+            <h2><i class="fas fa-pen-fancy"></i> አዲስ ጽሑፍ | New Article</h2>
             <form id="articleForm">
                 <div class="form-group">
-                    <label>Article Title</label>
-                    <input type="text" id="articleTitle" required>
+                    <label>ርዕስ | Title *</label>
+                    <input type="text" id="articleTitle" placeholder="ለምሳሌ፡ የኢትዮጵያ ሰላም ባህል" required>
                 </div>
                 <div class="form-group">
-                    <label>Excerpt (Short Summary)</label>
-                    <textarea id="articleExcerpt" rows="2" required></textarea>
+                    <label>አጭር መግለጫ | Excerpt *</label>
+                    <textarea id="articleExcerpt" rows="2" placeholder="ጽሑፉን በአጭሩ ይግለጹ" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Full Content</label>
-                    <textarea id="articleContent" rows="6" required></textarea>
+                    <label>ሙሉ ይዘት | Full Content</label>
+                    <textarea id="articleContent" rows="6" placeholder="ሙሉ ጽሑፉ እዚህ ይጻፉ"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Image URL</label>
+                    <label>የምስል አገናኝ | Image URL</label>
                     <input type="text" id="articleImage" placeholder="https://images.pexels.com/...">
                 </div>
-                <button type="submit" class="submit-btn">Publish Article</button>
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> አሳትም | Publish</button>
             </form>
         </div>
         
         <div class="articles-list">
-            <h2>Your Published Articles</h2>
+            <h2><i class="fas fa-list"></i> የታተሙ ጽሑፎች | Published Articles</h2>
             <div id="articlesList"></div>
         </div>
     </div>
@@ -100,18 +162,20 @@
         
         function displayArticles() {
             const container = document.getElementById('articlesList');
+            if (!container) return;
+            
             if (articles.length === 0) {
-                container.innerHTML = '<p>No articles yet. Write your first peace article!</p>';
+                container.innerHTML = '<div class="no-articles">📖 እስካሁን ምንም ጽሑፎች አልተጨመሩም። የመጀመሪያውን ጽሑፍ ይጻፉ! | No articles yet. Write your first peace article!</div>';
                 return;
             }
             
             container.innerHTML = articles.map(article => `
                 <div class="article-item">
                     <div>
-                        <strong>${article.title}</strong>
-                        <small>${new Date(article.date).toLocaleDateString()}</small>
+                        <strong><i class="fas fa-file-alt"></i> ${article.title}</strong>
+                        <small style="display:block; color:#d4c4b0;">${new Date(article.date).toLocaleDateString()}</small>
                     </div>
-                    <button class="btn-delete" onclick="deleteArticle(${article.id})">Delete</button>
+                    <button class="btn-delete" onclick="deleteArticle(${article.id})"><i class="fas fa-trash"></i> ሰርዝ | Delete</button>
                 </div>
             `).join('');
         }
@@ -123,9 +187,11 @@
         }
         
         function deleteArticle(id) {
-            articles = articles.filter(a => a.id !== id);
-            localStorage.setItem('magazineArticles', JSON.stringify(articles));
-            displayArticles();
+            if (confirm('እርግጠኛ ነዎት? ጽሑፉ ይሰረዛል | Are you sure? This will delete the article.')) {
+                articles = articles.filter(a => a.id !== id);
+                localStorage.setItem('magazineArticles', JSON.stringify(articles));
+                displayArticles();
+            }
         }
         
         document.getElementById('articleForm')?.addEventListener('submit', (e) => {
@@ -135,15 +201,15 @@
                 id: Date.now(),
                 title: document.getElementById('articleTitle').value,
                 excerpt: document.getElementById('articleExcerpt').value,
-                content: document.getElementById('articleContent').value,
+                content: document.getElementById('articleContent').value || 'Full article coming soon...',
                 image: document.getElementById('articleImage').value || 'https://images.pexels.com/photos/3466702/pexels-photo-3466702.jpeg',
-                author: 'Writer',
+                author: 'ደራሲ | Writer',
                 date: new Date().toISOString()
             };
             
             saveArticle(newArticle);
             e.target.reset();
-            alert('✅ Article published successfully!');
+            alert('✅ ጽሑፉ በተሳካ ሁኔታ ታትሟል! | Article published successfully!');
         });
         
         loadArticles();
