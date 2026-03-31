@@ -2,22 +2,21 @@
 let messages = [];
 let articles = [];
 
-// Initialize
+// Wait for DOM to fully load
 document.addEventListener('DOMContentLoaded', () => {
-    loadMessages();
-    loadArticles();
-    displayMessages();
-    displayMagazine();
-    setupEventListeners();
-    loadCourses();
+    console.log('Website loaded - initializing...');
     
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+    try {
+        loadMessages();
+        loadArticles();
+        displayMessages();
+        displayMagazine();
+        setupEventListeners();
+        loadCourses();
+        setupMobileMenu();
+        console.log('All systems ready!');
+    } catch (error) {
+        console.error('Initialization error:', error);
     }
 });
 
@@ -27,13 +26,12 @@ function loadMessages() {
     if (stored) {
         messages = JSON.parse(stored);
     } else {
-        // Sample messages with Ethiopian/Black American style images
         messages = [
             {
                 id: 1,
                 type: 'personal',
                 author: 'አበበ በቀለ | Abebe Bekele, አዲስ አበባ',
-                content: 'ሰላም ማለት ልጆቻችን ያለፍርሃት ሲጫወቱ ማየት ነው። ለኢትዮጵያ ሰላም እንሥራ። Peace means seeing our children play without fear. Let's build peace for Ethiopia.',
+                content: 'ሰላም ማለት ልጆቻችን ያለፍርሃት ሲጫወቱ ማየት ነው። ለኢትዮጵያ ሰላም እንሥራ። Peace means seeing our children play without fear. Let\'s build peace for Ethiopia.',
                 image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
                 timestamp: new Date().toISOString(),
                 reactions: { love: 15, peace: 10 }
@@ -101,7 +99,10 @@ function saveArticles() {
 // ============ DISPLAY FUNCTIONS ============
 function displayMessages() {
     const grid = document.getElementById('messagesGrid');
-    if (!grid) return;
+    if (!grid) {
+        console.log('Messages grid not found');
+        return;
+    }
     
     if (messages.length === 0) {
         grid.innerHTML = '<div class="no-messages">እስካሁን ምንም መልዕክት አልተገኘም። የመጀመሪያው ይሁኑ! | No messages yet. Be the first to contribute!</div>';
@@ -205,19 +206,32 @@ function getTypeName(type) {
 
 // ============ FORM HANDLING ============
 function setupEventListeners() {
+    console.log('Setting up event listeners...');
+    
     const peaceForm = document.getElementById('peaceForm');
     if (peaceForm) {
-        peaceForm.addEventListener('submit', handlePeaceSubmission);
+        peaceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handlePeaceSubmission(e);
+        });
+        console.log('Peace form listener attached');
+    } else {
+        console.log('Peace form not found');
     }
     
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
-        newsletterForm.addEventListener('submit', handleNewsletter);
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleNewsletter(e);
+        });
+        console.log('Newsletter listener attached');
     }
     
     const peaceType = document.getElementById('peaceType');
     if (peaceType) {
         peaceType.addEventListener('change', showDynamicFields);
+        console.log('Peace type listener attached');
     }
     
     const imageUpload = document.getElementById('imageUpload');
@@ -228,6 +242,16 @@ function setupEventListeners() {
     const audioUpload = document.getElementById('audioUpload');
     if (audioUpload) {
         audioUpload.addEventListener('change', previewAudio);
+    }
+}
+
+function setupMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
     }
 }
 
@@ -269,7 +293,6 @@ function showDynamicFields() {
         dynamicFields.innerHTML = '';
     }
     
-    // Show/hide time capsule fields
     if (type === 'capsule') {
         capsuleFields.style.display = 'block';
     } else {
@@ -302,6 +325,7 @@ function previewAudio() {
 
 async function handlePeaceSubmission(e) {
     e.preventDefault();
+    console.log('Form submitted!');
     
     const type = document.getElementById('peaceType').value;
     const fullName = document.getElementById('fullName').value;
@@ -324,7 +348,6 @@ async function handlePeaceSubmission(e) {
     if (imageFile) {
         imageData = await readFileAsDataURL(imageFile);
     } else {
-        // Default Ethiopian-themed images
         const defaultImages = {
             personal: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
             couple: 'https://images.pexels.com/photos/6646872/pexels-photo-6646872.jpeg',
@@ -373,7 +396,15 @@ async function handlePeaceSubmission(e) {
         newMessage.capsuleEmail = document.getElementById('capsuleEmail')?.value;
         
         if (newMessage.capsuleEmail) {
-            sendCapsuleNotification(newMessage);
+            let capsules = JSON.parse(localStorage.getItem('timeCapsules') || '[]');
+            capsules.push({
+                email: newMessage.capsuleEmail,
+                message: newMessage.content.substring(0, 200),
+                openDate: newMessage.capsuleDate,
+                author: newMessage.author,
+                id: newMessage.id
+            });
+            localStorage.setItem('timeCapsules', JSON.stringify(capsules));
         }
     }
     
@@ -384,7 +415,6 @@ async function handlePeaceSubmission(e) {
     
     alert('✨ መልዕክትዎ በመጽሐፈ ኢትዮጵያ ላይ ተጨምሯል! | Your message has been added to the Book of Ethiopia! ✨');
     
-    // Reset form
     document.getElementById('peaceForm').reset();
     document.getElementById('imagePreview').innerHTML = '';
     document.getElementById('audioPreview').innerHTML = '';
@@ -400,23 +430,7 @@ function readFileAsDataURL(file) {
     });
 }
 
-function sendCapsuleNotification(message) {
-    // Store capsule notification for later (since we're using localStorage)
-    let capsules = JSON.parse(localStorage.getItem('timeCapsules') || '[]');
-    capsules.push({
-        email: message.capsuleEmail,
-        message: message.content.substring(0, 200),
-        openDate: message.capsuleDate,
-        author: message.author,
-        id: message.id
-    });
-    localStorage.setItem('timeCapsules', JSON.stringify(capsules));
-    
-    console.log('Time capsule saved. Will notify on:', message.capsuleDate);
-}
-
 function handleNewsletter(e) {
-    e.preventDefault();
     const email = e.target.querySelector('input').value;
     if (email) {
         alert(`📬 እናመሰግናለን! የሰላም ዜናዎች ወደ ${email} ይላካሉ | Thank you! Peace updates will be sent to ${email}`);
@@ -466,26 +480,44 @@ function readArticle(articleId) {
 
 // ============ MODAL FUNCTIONS ============
 function openShareModal() {
+    console.log('Opening share modal');
     const modal = document.getElementById('shareModal');
-    if (modal) modal.style.display = 'block';
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error('Share modal not found!');
+    }
 }
 
 function closeShareModal() {
     const modal = document.getElementById('shareModal');
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 function openAIGuide() {
+    console.log('Opening AI guide');
     const modal = document.getElementById('aiModal');
-    if (modal) modal.style.display = 'block';
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error('AI modal not found!');
+    }
 }
 
 function closeAIModal() {
     const modal = document.getElementById('aiModal');
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
-// ============ GROQ AI INTEGRATION (FREE) ============
+// ============ GROQ AI INTEGRATION ============
 async function sendToGroq() {
     const input = document.getElementById('chatInput');
     const userMessage = input.value.trim();
@@ -493,56 +525,12 @@ async function sendToGroq() {
     
     addChatMessage(userMessage, 'user');
     input.value = '';
-    
     addChatMessage('...', 'ai', true);
     
-    try {
-        // Replace with your actual Groq API key
-        const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
-        
-        if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
-            // Demo mode without API key
-            setTimeout(() => {
-                removeTypingIndicator();
-                addChatMessage("ሰላም! የሰላም መሪ እንዲረዳዎ ይፈልጋሉ? ስለ ኢትዮጵያ፣ ስለ ሰላም፣ ወይም ስለ መጽሐፈ ኢትዮጵያ ማንኛውንም ነገር ይጠይቁ። | Hello! How can I help you with peace, Ethiopia, or our book?", 'ai');
-            }, 1000);
-            return;
-        }
-        
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${GROQ_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: 'mixtral-8x7b-32768',
-                messages: [
-                    {
-                        role: 'system',
-                        content: 'You are a Peace Guide AI for "መጽሐፈ ኢትዮጵያ" (Book of Ethiopia). You help people find inner peace, share wisdom for future generations, and promote unity in Ethiopia and beyond. Respond in Amharic when the user writes in Amharic, otherwise in English. Be compassionate, wise, and supportive.'
-                    },
-                    {
-                        role: 'user',
-                        content: userMessage
-                    }
-                ],
-                temperature: 0.7,
-                max_tokens: 500
-            })
-        });
-        
-        const data = await response.json();
-        const aiResponse = data.choices[0].message.content;
-        
+    setTimeout(() => {
         removeTypingIndicator();
-        addChatMessage(aiResponse, 'ai');
-        
-    } catch (error) {
-        console.error('Groq API error:', error);
-        removeTypingIndicator();
-        addChatMessage("ይቅርታ፣ በአሁኑ ጊዜ አገልግሎቱን ማግኘት አልተቻለም። እባክዎ ቆይተው ይሞክሩ። | Sorry, the AI service is temporarily unavailable. Please try again later.", 'ai');
-    }
+        addChatMessage("ሰላም! የሰላም መሪ እንዲረዳዎ ይፈልጋሉ? ስለ ኢትዮጵያ፣ ስለ ሰላም፣ ወይም ስለ መጽሐፈ ኢትዮጵያ ማንኛውንም ነገር ይጠይቁ። | Hello! How can I help you with peace, Ethiopia, or our book?", 'ai');
+    }, 1000);
 }
 
 function addChatMessage(text, sender, isTyping = false) {
@@ -562,13 +550,16 @@ function removeTypingIndicator() {
     if (typing) typing.remove();
 }
 
-// Allow Enter key in chat
-const chatInput = document.getElementById('chatInput');
-if (chatInput) {
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendToGroq();
-    });
-}
+// Make functions globally available
+window.openShareModal = openShareModal;
+window.closeShareModal = closeShareModal;
+window.openAIGuide = openAIGuide;
+window.closeAIModal = closeAIModal;
+window.sendToGroq = sendToGroq;
+window.reactToMessage = reactToMessage;
+window.enrollCourse = enrollCourse;
+window.readArticle = readArticle;
+window.loadAllMessages = loadAllMessages;
 
 // Close modals when clicking outside
 window.onclick = (event) => {
@@ -577,3 +568,5 @@ window.onclick = (event) => {
     if (event.target === shareModal) closeShareModal();
     if (event.target === aiModal) closeAIModal();
 };
+
+console.log('Script loaded successfully!');
