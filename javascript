@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     displayMagazine();
     setupEventListeners();
     loadCourses();
+    
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
 });
 
 // Load from localStorage
@@ -18,37 +27,34 @@ function loadMessages() {
     if (stored) {
         messages = JSON.parse(stored);
     } else {
-        // Sample messages with real human images (Ethiopian & Black American style)
+        // Sample messages with Ethiopian/Black American style images
         messages = [
             {
                 id: 1,
                 type: 'personal',
-                author: 'Meron A., Addis Ababa',
-                email: 'meron@example.com',
-                content: 'Peace means seeing my children play without fear. From Ethiopia to the world, we stand together in love and unity.',
+                author: 'አበበ በቀለ | Abebe Bekele, አዲስ አበባ',
+                content: 'ሰላም ማለት ልጆቻችን ያለፍርሃት ሲጫወቱ ማየት ነው። ለኢትዮጵያ ሰላም እንሥራ። Peace means seeing our children play without fear. Let's build peace for Ethiopia.',
                 image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
                 timestamp: new Date().toISOString(),
-                reactions: { love: 12, peace: 8 }
+                reactions: { love: 15, peace: 10 }
             },
             {
                 id: 2,
-                type: 'community',
-                author: 'Marcus W., Atlanta',
-                email: 'marcus@example.com',
-                content: 'Our ancestors dreamed of this unity. Ethiopian and Black American solidarity is the bridge to peace. Together we rise!',
-                image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
+                type: 'family',
+                author: 'የአዳም ቤተሰብ | Adam Family, ዲሬ ዳዋ',
+                content: 'ቤተሰባችን ለሰላም ቆሞአል። ኢትዮጵያ ትንሳኤዋን ታገኝ! Our family stands for peace. Ethiopia will rise!',
+                image: 'https://images.pexels.com/photos/6646861/pexels-photo-6646861.jpeg',
                 timestamp: new Date().toISOString(),
-                reactions: { love: 24, peace: 15 }
+                reactions: { love: 22, peace: 18 }
             },
             {
                 id: 3,
-                type: 'family',
-                author: 'The Johnson Family, Chicago',
-                email: 'johnson@example.com',
-                content: 'Our family stands for peace across all cultures. Ethiopia and Black America united!',
-                image: 'https://images.pexels.com/photos/6646861/pexels-photo-6646861.jpeg',
+                type: 'group',
+                author: 'ወጣቶች ለሰላም | Youth for Peace, ባህር ዳር',
+                content: 'እኛ የነገው ትውልድ ሰላምን እንገነባለን። We the youth build peace for tomorrow.',
+                image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
                 timestamp: new Date().toISOString(),
-                reactions: { love: 18, peace: 10 }
+                reactions: { love: 35, peace: 28 }
             }
         ];
         saveMessages();
@@ -67,29 +73,20 @@ function loadArticles() {
         articles = [
             {
                 id: 1,
-                title: 'The Ethiopian Peace Tradition: A 3000-Year Legacy',
-                excerpt: 'Exploring ancient peace practices from the Horn of Africa that still resonate today...',
+                title: 'የኢትዮጵያ ሰላም ባህል | Ethiopian Peace Tradition',
+                excerpt: 'ከ3000 ዓመታት በላይ የዘለቀ የኢትዮጵያ ሰላም ባህል ለዛሬው ትውልድ ምን ያስተምረናል? What does Ethiopia\'s 3000-year peace tradition teach us today?',
                 content: 'Full article content here...',
                 image: 'https://images.pexels.com/photos/3466702/pexels-photo-3466702.jpeg',
-                author: 'Writer',
+                author: 'ደራሲ | Writer',
                 date: new Date().toISOString()
             },
             {
                 id: 2,
-                title: 'From Civil Rights to Global Peace: Black American Leadership',
-                excerpt: 'How the legacy of Dr. King and modern movements inspire peace worldwide...',
+                title: 'መጽሐፈ ኢትዮጵያ፡ የሕዝብ ጥበብ | The People\'s Book',
+                excerpt: 'አብረን የምንጽፈው መጽሐፍ - የኢትዮጵያ ሕዝብ ድምጽ ለትውልድ',
                 content: 'Full article content here...',
                 image: 'https://images.pexels.com/photos/2449543/pexels-photo-2449543.jpeg',
-                author: 'Writer',
-                date: new Date().toISOString()
-            },
-            {
-                id: 3,
-                title: 'Bridges of Unity: Ethiopian & Black American Connections',
-                excerpt: 'Stories of solidarity, cultural exchange, and shared dreams for peace...',
-                content: 'Full article content here...',
-                image: 'https://images.pexels.com/photos/3171810/pexels-photo-3171810.jpeg',
-                author: 'Writer',
+                author: 'ደራሲ | Writer',
                 date: new Date().toISOString()
             }
         ];
@@ -106,18 +103,23 @@ function displayMessages() {
     const grid = document.getElementById('messagesGrid');
     if (!grid) return;
     
+    if (messages.length === 0) {
+        grid.innerHTML = '<div class="no-messages">እስካሁን ምንም መልዕክት አልተገኘም። የመጀመሪያው ይሁኑ! | No messages yet. Be the first to contribute!</div>';
+        return;
+    }
+    
     grid.innerHTML = messages.slice(0, 9).map(msg => `
         <div class="message-card">
             <img src="${msg.image || 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg'}" class="message-image" alt="Peace moment">
             <div class="message-content">
                 <div class="message-author">🕊️ ${msg.author}</div>
-                <span class="message-type">${getTypeIcon(msg.type)} ${msg.type.toUpperCase()}</span>
+                <span class="message-type">${getTypeIcon(msg.type)} ${getTypeName(msg.type)}</span>
                 <div class="message-text">${msg.content}</div>
                 ${msg.audio ? `<audio controls src="${msg.audio}" class="audio-player"></audio>` : ''}
                 <small>${new Date(msg.timestamp).toLocaleDateString()}</small>
-                <div class="reactions" style="margin-top: 10px;">
-                    <button onclick="reactToMessage(${msg.id}, 'love')" style="background:none; border:none; cursor:pointer;">❤️ ${msg.reactions?.love || 0}</button>
-                    <button onclick="reactToMessage(${msg.id}, 'peace')" style="background:none; border:none; cursor:pointer;">🙌 ${msg.reactions?.peace || 0}</button>
+                <div class="reactions" style="margin-top: 12px;">
+                    <button onclick="reactToMessage(${msg.id}, 'love')">❤️ ${msg.reactions?.love || 0}</button>
+                    <button onclick="reactToMessage(${msg.id}, 'peace')">🙌 ${msg.reactions?.peace || 0}</button>
                 </div>
             </div>
         </div>
@@ -128,13 +130,18 @@ function displayMagazine() {
     const grid = document.getElementById('magazineGrid');
     if (!grid) return;
     
+    if (articles.length === 0) {
+        grid.innerHTML = '<div class="no-messages">እስካሁን ጽሑፎች አልተጨመሩም። የመጀመሪያውን ጽሑፍ ይጻፉ! | No articles yet. Write your first peace article!</div>';
+        return;
+    }
+    
     grid.innerHTML = articles.map(article => `
         <div class="magazine-card">
             <img src="${article.image}" alt="${article.title}">
             <h3>${article.title}</h3>
             <p>${article.excerpt}</p>
             <small>By ${article.author} • ${new Date(article.date).toLocaleDateString()}</small>
-            <button onclick="readArticle(${article.id})" style="margin-top: 1rem; background:#9b59b6; border:none; padding:8px 16px; border-radius:5px; color:white; cursor:pointer;">Read More →</button>
+            <button onclick="readArticle(${article.id})" style="margin-top: 1rem; background:#9b59b6; border:none; padding:8px 18px; border-radius:30px; color:white; cursor:pointer;">Read More →</button>
         </div>
     `).join('');
 }
@@ -146,34 +153,30 @@ function loadCourses() {
     const courses = [
         {
             id: 1,
-            title: 'Foundations of Peacebuilding',
-            description: 'Learn peace principles from Ethiopian and Black American leaders',
-            image: 'https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg',
-            duration: '4 weeks'
+            title: 'የሰላም ግንባታ መሠረቶች | Foundations of Peacebuilding',
+            description: 'የሰላም ግንባታ መሠረታዊ መርሆችን ይማሩ | Learn core principles of peacebuilding',
+            duration: '4 ሳምንታት | 4 weeks • Self-paced'
         },
         {
             id: 2,
-            title: 'Community Dialogue & Mediation',
-            description: 'Bridge cultural differences through effective communication',
-            image: 'https://images.pexels.com/photos/3184419/pexels-photo-3184419.jpeg',
-            duration: '6 weeks'
+            title: 'ማህበረሰብ ውይይት እና ሽምግልና | Community Dialogue & Mediation',
+            description: 'አስቸጋሪ ውይይቶችን የማካሄድ ክህሎት | Master facilitating difficult conversations',
+            duration: '6 ሳምንታት | 6 weeks • Interactive'
         },
         {
             id: 3,
-            title: 'Youth Peace Leadership',
-            description: 'Empower the next generation of peacemakers',
-            image: 'https://images.pexels.com/photos/6646862/pexels-photo-6646862.jpeg',
-            duration: '8 weeks'
+            title: 'ወጣቶች የሰላም አመራር | Youth Peace Leadership',
+            description: 'ወጣቶች የሰላም መሪዎች እንዲሆኑ ማበረታቻ | Empower youth as peace leaders',
+            duration: '8 ሳምንታት | 8 weeks • Certificate'
         }
     ];
     
     grid.innerHTML = courses.map(course => `
         <div class="course-card">
-            <img src="${course.image}" alt="${course.title}">
-            <h3>${course.title}</h3>
+            <h3><i class="fas fa-book-open"></i> ${course.title}</h3>
             <p>${course.description}</p>
             <p><i class="fas fa-clock"></i> ${course.duration}</p>
-            <button onclick="enrollCourse(${course.id})" style="margin-top: 1rem; background:#f1c40f; border:none; padding:10px 20px; border-radius:5px; color:#1a0b2e; cursor:pointer; font-weight:600;">Enroll Free →</button>
+            <button onclick="enrollCourse(${course.id})" class="enroll-btn">ተመዝገብ | Enroll Free →</button>
         </div>
     `).join('');
 }
@@ -187,6 +190,17 @@ function getTypeIcon(type) {
         capsule: '⏰'
     };
     return icons[type] || '🕊️';
+}
+
+function getTypeName(type) {
+    const names = {
+        personal: 'የግል ምስክርነት | Personal',
+        couple: 'የባልና ሚስት | Couple',
+        family: 'የቤተሰብ | Family',
+        group: 'የማህበረሰብ | Community',
+        capsule: 'የጊዜ ሳጥን | Time Capsule'
+    };
+    return names[type] || 'Peace';
 }
 
 // ============ FORM HANDLING ============
@@ -204,11 +218,6 @@ function setupEventListeners() {
     const peaceType = document.getElementById('peaceType');
     if (peaceType) {
         peaceType.addEventListener('change', showDynamicFields);
-    }
-    
-    const menuToggle = document.querySelector('.menu-toggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', toggleMenu);
     }
     
     const imageUpload = document.getElementById('imageUpload');
@@ -230,30 +239,30 @@ function showDynamicFields() {
     if (type === 'family') {
         dynamicFields.innerHTML = `
             <div class="form-group">
-                <label><i class="fas fa-users"></i> Family Members Names</label>
-                <textarea id="familyMembers" rows="3" placeholder="List family members (one per line)"></textarea>
+                <label><i class="fas fa-users"></i> የቤተሰብ አባላት ስሞች | Family Members Names</label>
+                <textarea id="familyMembers" rows="3" placeholder="የቤተሰብ አባላት (አንድ በአንድ መስመር) | List family members (one per line)"></textarea>
             </div>
             <div class="form-group">
-                <label><i class="fas fa-tag"></i> Family Name</label>
-                <input type="text" id="familyName" placeholder="Family name (e.g., Johnson Family)">
+                <label><i class="fas fa-tag"></i> የቤተሰብ ስም | Family Name</label>
+                <input type="text" id="familyName" placeholder="ለምሳሌ፡ የአበበ ቤተሰብ | e.g., Abebe Family">
             </div>
         `;
     } else if (type === 'group') {
         dynamicFields.innerHTML = `
             <div class="form-group">
-                <label><i class="fas fa-users"></i> Group/Community Name</label>
-                <input type="text" id="groupName" placeholder="Group or community name">
+                <label><i class="fas fa-users"></i> የማህበረሰብ/ቡድን ስም | Group/Community Name</label>
+                <input type="text" id="groupName" placeholder="ለምሳሌ፡ ወጣቶች ለሰላም | e.g., Youth for Peace">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-user-plus"></i> Number of Members</label>
-                <input type="number" id="memberCount" placeholder="How many people?">
+                <label><i class="fas fa-user-plus"></i> የአባላት ቁጥር | Number of Members</label>
+                <input type="number" id="memberCount" placeholder="ስንት ሰዎች? | How many people?">
             </div>
         `;
     } else if (type === 'couple') {
         dynamicFields.innerHTML = `
             <div class="form-group">
-                <label><i class="fas fa-heart"></i> Partner's Name</label>
-                <input type="text" id="partnerName" placeholder="Partner's name">
+                <label><i class="fas fa-heart"></i> የትዳር ጓደኛ/ወይም አጋር ስም | Partner's Name</label>
+                <input type="text" id="partnerName" placeholder="የትዳር ጓደኛዎ/ዎት ስም | Your partner's name">
             </div>
         `;
     } else {
@@ -274,7 +283,7 @@ function previewImage() {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; height:auto; margin-top:10px; border-radius:10px;">`;
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; height:auto; margin-top:10px; border-radius:12px;">`;
         };
         reader.readAsDataURL(file);
     }
@@ -286,8 +295,8 @@ function previewAudio() {
     if (file && file.type === 'audio/mpeg') {
         const url = URL.createObjectURL(file);
         preview.innerHTML = `<audio controls src="${url}" style="width:100%; margin-top:10px;"></audio>`;
-    } else {
-        preview.innerHTML = '<p style="color:red;">Please upload MP3 file</p>';
+    } else if (file) {
+        preview.innerHTML = '<p style="color:#f1c40f;">እባክዎ MP3 ፋይል ይምረጡ | Please upload MP3 file</p>';
     }
 }
 
@@ -304,13 +313,18 @@ async function handlePeaceSubmission(e) {
     const language = document.getElementById('language').value;
     const messageContent = document.getElementById('messageContent').value;
     
+    if (!messageContent.trim()) {
+        alert('እባክዎ መልዕክትዎን ይጻፉ | Please write your message');
+        return;
+    }
+    
     // Handle image
     let imageData = null;
     const imageFile = document.getElementById('imageUpload').files[0];
     if (imageFile) {
         imageData = await readFileAsDataURL(imageFile);
     } else {
-        // Default human images based on type
+        // Default Ethiopian-themed images
         const defaultImages = {
             personal: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
             couple: 'https://images.pexels.com/photos/6646872/pexels-photo-6646872.jpeg',
@@ -358,9 +372,8 @@ async function handlePeaceSubmission(e) {
         newMessage.capsuleDate = document.getElementById('capsuleDate')?.value;
         newMessage.capsuleEmail = document.getElementById('capsuleEmail')?.value;
         
-        // Send notification via Formspree (free)
         if (newMessage.capsuleEmail) {
-            await sendCapsuleNotification(newMessage);
+            sendCapsuleNotification(newMessage);
         }
     }
     
@@ -369,11 +382,14 @@ async function handlePeaceSubmission(e) {
     displayMessages();
     closeShareModal();
     
-    alert('✨ Your peace message has been released to the sky! ✨');
+    alert('✨ መልዕክትዎ በመጽሐፈ ኢትዮጵያ ላይ ተጨምሯል! | Your message has been added to the Book of Ethiopia! ✨');
+    
+    // Reset form
     document.getElementById('peaceForm').reset();
     document.getElementById('imagePreview').innerHTML = '';
     document.getElementById('audioPreview').innerHTML = '';
     document.getElementById('dynamicFields').innerHTML = '';
+    document.getElementById('capsuleFields').style.display = 'none';
 }
 
 function readFileAsDataURL(file) {
@@ -384,37 +400,28 @@ function readFileAsDataURL(file) {
     });
 }
 
-async function sendCapsuleNotification(message) {
-    // Using Formspree free endpoint (replace with your endpoint)
-    try {
-        await fetch('https://formspree.io/f/your-endpoint', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: message.capsuleEmail,
-                message: `Your time capsule "${message.content.substring(0, 100)}..." will open on ${new Date(message.capsuleDate).toLocaleString()}`,
-                subject: 'Book for Peace - Time Capsule Confirmation'
-            })
-        });
-    } catch (error) {
-        console.log('Notification queued locally');
-        // Store for later
-        let notifications = JSON.parse(localStorage.getItem('capsuleNotifications') || '[]');
-        notifications.push(message);
-        localStorage.setItem('capsuleNotifications', JSON.stringify(notifications));
-    }
+function sendCapsuleNotification(message) {
+    // Store capsule notification for later (since we're using localStorage)
+    let capsules = JSON.parse(localStorage.getItem('timeCapsules') || '[]');
+    capsules.push({
+        email: message.capsuleEmail,
+        message: message.content.substring(0, 200),
+        openDate: message.capsuleDate,
+        author: message.author,
+        id: message.id
+    });
+    localStorage.setItem('timeCapsules', JSON.stringify(capsules));
+    
+    console.log('Time capsule saved. Will notify on:', message.capsuleDate);
 }
 
 function handleNewsletter(e) {
     e.preventDefault();
     const email = e.target.querySelector('input').value;
-    alert(`📬 Thank you for subscribing! Peace updates will be sent to ${email}`);
-    e.target.reset();
-}
-
-function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    if (email) {
+        alert(`📬 እናመሰግናለን! የሰላም ዜናዎች ወደ ${email} ይላካሉ | Thank you! Peace updates will be sent to ${email}`);
+        e.target.reset();
+    }
 }
 
 function reactToMessage(messageId, reactionType) {
@@ -433,23 +440,21 @@ function loadAllMessages() {
 
 function enrollCourse(courseId) {
     const courses = {
-        1: 'Foundations of Peacebuilding',
-        2: 'Community Dialogue & Mediation',
-        3: 'Youth Peace Leadership'
+        1: 'የሰላም ግንባታ መሠረቶች | Foundations of Peacebuilding',
+        2: 'ማህበረሰብ ውይይት እና ሽምግልና | Community Dialogue & Mediation',
+        3: 'ወጣቶች የሰላም አመራር | Youth Peace Leadership'
     };
     
-    const enrollment = {
+    let enrollments = JSON.parse(localStorage.getItem('courseEnrollments') || '[]');
+    enrollments.push({
         courseId: courseId,
         courseName: courses[courseId],
         date: new Date().toISOString(),
         userId: Date.now()
-    };
-    
-    let enrollments = JSON.parse(localStorage.getItem('courseEnrollments') || '[]');
-    enrollments.push(enrollment);
+    });
     localStorage.setItem('courseEnrollments', JSON.stringify(enrollments));
     
-    alert(`✨ You've enrolled in: ${courses[courseId]}!\nCheck your email for course materials.`);
+    alert(`✨ በ ${courses[courseId]} ላይ ተመዝግበዋል! ተጨማሪ መረጃ በኢሜይል ይላካል | You've enrolled in ${courses[courseId]}! Check your email for details.`);
 }
 
 function readArticle(articleId) {
@@ -461,19 +466,23 @@ function readArticle(articleId) {
 
 // ============ MODAL FUNCTIONS ============
 function openShareModal() {
-    document.getElementById('shareModal').style.display = 'block';
+    const modal = document.getElementById('shareModal');
+    if (modal) modal.style.display = 'block';
 }
 
 function closeShareModal() {
-    document.getElementById('shareModal').style.display = 'none';
+    const modal = document.getElementById('shareModal');
+    if (modal) modal.style.display = 'none';
 }
 
 function openAIGuide() {
-    document.getElementById('aiModal').style.display = 'block';
+    const modal = document.getElementById('aiModal');
+    if (modal) modal.style.display = 'block';
 }
 
 function closeAIModal() {
-    document.getElementById('aiModal').style.display = 'none';
+    const modal = document.getElementById('aiModal');
+    if (modal) modal.style.display = 'none';
 }
 
 // ============ GROQ AI INTEGRATION (FREE) ============
@@ -482,27 +491,36 @@ async function sendToGroq() {
     const userMessage = input.value.trim();
     if (!userMessage) return;
     
-    // Add user message to chat
     addChatMessage(userMessage, 'user');
     input.value = '';
     
-    // Show typing indicator
     addChatMessage('...', 'ai', true);
     
     try {
-        // Using Groq's free API (you'll need to add your API key)
+        // Replace with your actual Groq API key
+        const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
+        
+        if (GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
+            // Demo mode without API key
+            setTimeout(() => {
+                removeTypingIndicator();
+                addChatMessage("ሰላም! የሰላም መሪ እንዲረዳዎ ይፈልጋሉ? ስለ ኢትዮጵያ፣ ስለ ሰላም፣ ወይም ስለ መጽሐፈ ኢትዮጵያ ማንኛውንም ነገር ይጠይቁ። | Hello! How can I help you with peace, Ethiopia, or our book?", 'ai');
+            }, 1000);
+            return;
+        }
+        
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer YOUR_GROQ_API_KEY' // Replace with your key
+                'Authorization': `Bearer ${GROQ_API_KEY}`
             },
             body: JSON.stringify({
                 model: 'mixtral-8x7b-32768',
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are a Peace Guide AI. You help people find inner peace, resolve conflicts, and promote unity between Ethiopian and Black American communities. Be compassionate, wise, and supportive.'
+                        content: 'You are a Peace Guide AI for "መጽሐፈ ኢትዮጵያ" (Book of Ethiopia). You help people find inner peace, share wisdom for future generations, and promote unity in Ethiopia and beyond. Respond in Amharic when the user writes in Amharic, otherwise in English. Be compassionate, wise, and supportive.'
                     },
                     {
                         role: 'user',
@@ -517,19 +535,20 @@ async function sendToGroq() {
         const data = await response.json();
         const aiResponse = data.choices[0].message.content;
         
-        // Remove typing indicator and add real response
         removeTypingIndicator();
         addChatMessage(aiResponse, 'ai');
         
     } catch (error) {
         console.error('Groq API error:', error);
         removeTypingIndicator();
-        addChatMessage("I'm here to support you. Please try again, or share what's on your mind about peace.", 'ai');
+        addChatMessage("ይቅርታ፣ በአሁኑ ጊዜ አገልግሎቱን ማግኘት አልተቻለም። እባክዎ ቆይተው ይሞክሩ። | Sorry, the AI service is temporarily unavailable. Please try again later.", 'ai');
     }
 }
 
 function addChatMessage(text, sender, isTyping = false) {
     const container = document.getElementById('chatMessages');
+    if (!container) return;
+    
     const messageDiv = document.createElement('div');
     messageDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
     if (isTyping) messageDiv.id = 'typing-indicator';
@@ -544,9 +563,12 @@ function removeTypingIndicator() {
 }
 
 // Allow Enter key in chat
-document.getElementById('chatInput')?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendToGroq();
-});
+const chatInput = document.getElementById('chatInput');
+if (chatInput) {
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendToGroq();
+    });
+}
 
 // Close modals when clicking outside
 window.onclick = (event) => {
