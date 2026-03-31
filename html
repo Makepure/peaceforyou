@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book for Peace | Selam AI - Your Peace Companion</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #fefdf7 0%, #fff9ef 100%);
+      color: #1e2f2f;
+      line-height: 1.5;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: linear-gradient(145deg, #f3f1e6, #fff9ef);
+      border-bottom: 2px solid #e9c891;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2c5a5a, #4a7a6e, #e9b35f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .sub {
+      font-size: 1.4rem;
+      color: #6c5e3f;
+      border-top: 2px solid #e9c891;
+      display: inline-block;
+      padding-top: 16px;
+    }
+
+    /* Sky Banner */
+    .sky-banner {
+      background: linear-gradient(135deg, #d9e2db, #cbd9cf);
+      margin: 48px 0;
+      border-radius: 60px;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .sky-banner h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #2c4e3f;
+    }
+
+    .sky-link {
+      background: #2c4a4a;
+      padding: 12px 28px;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .sky-link:hover {
+      background: #1e3434;
+      transform: translateY(-2px);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 48px 0 24px;
+      border-left: 5px solid #e9b35f;
+      padding-left: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2b4a3e;
+    }
+
+    .view-all {
+      color: #b67b2e;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .view-all:hover {
+      color: #e9b35f;
+    }
+
+    /* Peace Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin: 40px 0;
+    }
+
+    .peace-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 1px solid #f0ebdd;
+    }
+
+    .peace-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 40px rgba(0,0,0,0.12);
+      border-color: #e9c891;
+    }
+
+    .card-image {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #e9c891;
+      display: block;
+    }
+
+    .peace-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      color: #2c5a5a;
+      margin-bottom: 8px;
+    }
+
+    .peace-card p {
+      text-align: center;
+      color: #6f6f5e;
+      margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    .peace-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e0d8c6;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: #fefcf8;
+      transition: all 0.3s;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #e9b35f;
+      box-shadow: 0 0 0 3px rgba(233, 179, 95, 0.2);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .char-count {
+      font-size: 0.7rem;
+      color: #9b8e72;
+      text-align: right;
+      margin-top: -8px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #2c5a5a, #3f7868);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.02);
+      background: linear-gradient(135deg, #1e4343, #2f5e50);
+    }
+
+    .submission-feedback {
+      font-size: 0.75rem;
+      text-align: center;
+      color: #4a9e6e;
+      margin-top: 8px;
+    }
+
+    /* Recent Lights */
+    .recent-lights {
+      margin: 40px 0;
+    }
+
+    .lights-list {
+      background: #fef7e8;
+      border-radius: 32px;
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .light-item {
+      background: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    /* Courses Section */
+    .courses-section {
+      background: #fbf9f2;
+      padding: 60px 0;
+      margin: 40px 0;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+    }
+
+    .course-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .course-card h3 {
+      font-size: 1.3rem;
+      color: #2a5543;
+      margin: 12px 0;
+    }
+
+    .course-card p {
+      color: #5c6e62;
+      font-size: 0.9rem;
+    }
+
+    .course-progress {
+      background: #e5e0d0;
+      border-radius: 40px;
+      height: 8px;
+      margin: 20px 0 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background: #e0a453;
+      border-radius: 40px;
+      height: 100%;
+      transition: width 0.5s;
+    }
+
+    .btn-continue {
+      background: transparent;
+      border: 2px solid #dbb067;
+      color: #9b6a2c;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: all 0.3s;
+    }
+
+    .btn-continue:hover {
+      background: #dbb067;
+      color: white;
+    }
+
+    /* Magazine Section */
+    .magazine-section {
+      padding: 60px 0;
+    }
+
+    .magazine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 32px;
+    }
+
+    .magazine-card {
+      background: #fffcf5;
+      border-radius: 24px;
+      padding: 24px;
+      border-left: 6px solid #e5b15c;
+      transition: all 0.3s;
+    }
+
+    .magazine-card:hover {
+      transform: translateX(6px);
+      background: #fff9ef;
+    }
+
+    .magazine-date {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #bc8742;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .magazine-card h3 {
+      font-size: 1.3rem;
+      margin: 12px 0;
+      color: #2f5a4a;
+    }
+
+    .magazine-card p {
+      color: #5b6b5e;
+      line-height: 1.5;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 16px;
+      color: #c2862c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-archive {
+      background: #2f5a4a;
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 32px;
+      transition: all 0.3s;
+    }
+
+    .btn-archive:hover {
+      background: #1e3f33;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #1e2f2a;
+      color: #ded9ca;
+      padding: 48px 24px 24px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #f3e7cf;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+    }
+
+    .footer-column h4 {
+      color: #eedba7;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #bcbbaa;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #eab668;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      margin-top: 32px;
+      border-top: 1px solid rgba(235, 220, 180, 0.2);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.75rem;
+    }
+
+    .social-links a {
+      color: #cbc6ae;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    /* Chatbot Styles */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(233, 179, 95, 0.5); }
+    }
+
+    .chatbot-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2c5a5a, #4a7a6e);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      z-index: 1000;
+      border: 3px solid #e9c891;
+      animation: pulse 2s ease-in-out infinite;
+      transition: all 0.3s;
+    }
+
+    .chatbot-button:hover {
+      transform: scale(1.08);
+      animation: none;
+    }
+
+    .selam-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .chatbot-window {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      width: 380px;
+      height: 560px;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1001;
+      border: 1px solid #e9c891;
+    }
+
+    .chatbot-window.open {
+      display: flex;
+    }
+
+    .chatbot-header {
+      background: linear-gradient(135deg, #2c5a5a, #3f7868);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header h3 {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .ai-badge {
+      background: #e9b35f;
+      color: #2c5a5a;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: bold;
+    }
+
+    .close-chat {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .close-chat:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: #fefcf8;
+    }
+
+    .message {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.bot {
+      justify-content: flex-start;
+    }
+
+    .bot-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .message-content {
+      max-width: 70%;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .message.user .message-content {
+      background: #2c5a5a;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.bot .message-content {
+      background: white;
+      border: 1px solid #e0d8c6;
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-indicator {
+      padding: 10px 16px;
+      background: white;
+      border: 1px solid #e0d8c6;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .typing-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e9b35f;
+      margin: 0 2px;
+      animation: typing 1.4s infinite;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    .chat-input-area {
+      padding: 12px;
+      border-top: 1px solid #e0d8c6;
+      display: flex;
+      gap: 10px;
+      background: white;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #e0d8c6;
+      border-radius: 28px;
+      font-family: inherit;
+      resize: none;
+      font-size: 0.85rem;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: #e9b35f;
+    }
+
+    .send-btn {
+      background: #2c5a5a;
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 28px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .send-btn:hover {
+      background: #1e4343;
+    }
+
+    .quick-replies {
+      padding: 10px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px solid #e0d8c6;
+      background: #fefcf8;
+    }
+
+    .quick-reply {
+      background: #f0ebdd;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: #2c5a5a;
+      transition: all 0.3s;
+    }
+
+    .quick-reply:hover {
+      background: #e9c891;
+    }
+
+    .api-warning {
+      background: #fff3e0;
+      padding: 8px;
+      font-size: 10px;
+      text-align: center;
+      color: #b67b2e;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .sky-banner h2 { font-size: 1.3rem; }
+      .section-header h2 { font-size: 1.6rem; }
+      .chatbot-window { width: calc(100vw - 40px); right: 20px; height: 520px; }
+      .footer-content { flex-direction: column; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero">
+  <h1>We do not wait for peace.<br>We make it.</h1>
+  <div class="sub">☁️ share your story · plant seeds of harmony</div>
+</div>
+
+<div class="container">
+  <!-- Sky Banner -->
+  <div class="sky-banner">
+    <h2>☁️ The Sky Canvas — watch peace messages float</h2>
+    <a href="#" class="sky-link">View Full Sky →</a>
+  </div>
+
+  <!-- Peace Cards -->
+  <div class="section-header">
+    <h2>✨ Share Your Peace</h2>
+    <a href="#" class="view-all">View all →</a>
+  </div>
+
+  <div class="cards-grid">
+    <!-- Personal Card -->
+    <div class="peace-card">
+      <img src="https://picsum.photos/id/20/80/80" alt="Personal" class="card-image">
+      <h3>👤 PERSONAL</h3>
+      <p>Share your peace word or full story</p>
+      <form class="peace-form" onsubmit="handleSubmission(event, 'Personal')">
+        <input type="text" class="form-input" placeholder="Your name (optional)">
+        <textarea class="form-textarea" placeholder="Write your peace message, story, or reflection..." maxlength="1000" required></textarea>
+        <div class="char-count">0 / 1000</div>
+        <button type="submit" class="submit-btn">✧ Share My Peace ✧</button>
+        <div class="submission-feedback"></div>
+      </form>
+    </div>
+
+    <!-- Couple Card -->
+    <div class="peace-card">
+      <img src="https://picsum.photos/id/58/80/80" alt="Couple" class="card-image">
+      <h3>💑 COUPLE</h3>
+      <p>Share your love story</p>
+      <form class="peace-form" onsubmit="handleSubmission(event, 'Couple')">
+        <input type="text" class="form-input" placeholder="Names (optional)">
+        <textarea class="form-textarea" placeholder="Share your journey of love, partnership, or a message of unity..." maxlength="1000" required></textarea>
+        <div class="char-count">0 / 1000</div>
+        <button type="submit" class="submit-btn">✧ Share Our Love ✧</button>
+        <div class="submission-feedback"></div>
+      </form>
+    </div>
+
+    <!-- Family Card -->
+    <div class="peace-card">
+      <img src="https://picsum.photos/id/96/80/80" alt="Family" class="card-image">
+      <h3>👨👩👧👦 FAMILY</h3>
+      <p>Share family peace</p>
+      <form class="peace-form" onsubmit="handleSubmission(event, 'Family')">
+        <input type="text" class="form-input" placeholder="Family name">
+        <textarea class="form-textarea" placeholder="Tell us about your family's peace tradition, a memory, or hope..." maxlength="1000" required></textarea>
+        <div class="char-count">0 / 1000</div>
+        <button type="submit" class="submit-btn">✧ Share Family Peace ✧</button>
+        <div class="submission-feedback"></div>
+      </form>
+    </div>
+
+    <!-- Group Card -->
+    <div class="peace-card">
+      <img src="https://picsum.photos/id/155/80/80" alt="Group" class="card-image">
+      <h3>👥 GROUP</h3>
+      <p>Share group peace</p>
+      <form class="peace-form" onsubmit="handleSubmission(event, 'Group')">
+        <input type="text" class="form-input" placeholder="Group/Organization name">
+        <textarea class="form-textarea" placeholder="Describe your group's peace work, event, or collective message..." maxlength="1000" required></textarea>
+        <div class="char-count">0 / 1000</div>
+        <button type="submit" class="submit-btn">✧ Share Group Peace ✧</button>
+        <div class="submission-feedback"></div>
+      </form>
+    </div>
+
+    <!-- Time Capsule Card -->
+    <div class="peace-card">
+      <img src="https://picsum.photos/id/29/80/80" alt="Time Capsule" class="card-image">
+      <h3>⭐ TIME CAPSULE</h3>
+      <p>Seal a message for the future</p>
+      <form class="peace-form" onsubmit="handleSubmission(event, 'Time Capsule')">
+        <input type="text" class="form-input" placeholder="Your name">
+        <textarea class="form-textarea" placeholder="Write a letter to future generations. What peace message should last?" maxlength="1000" required></textarea>
+        <div class="char-count">0 / 1000</div>
+        <button type="submit" class="submit-btn">✧ Seal in Capsule ✧</button>
+        <div class="submission-feedback"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Recent Lights -->
+  <div class="recent-lights">
+    <div class="section-header">
+      <h2>📖 Recent Lights — Community Voices</h2>
+      <a href="#" class="view-all" onclick="viewAllSubmissions(); return false;">View All →</a>
+    </div>
+    <div id="recent-lights-container" class="lights-list">
+      <div class="light-item">✨ “Peace begins with a smile — Yonas”</div>
+      <div class="light-item">🕊️ “We plant seeds of kindness — Mekdes”</div>
+      <div class="light-item">💫 “Hope blooms in silence — Amina”</div>
+    </div>
+  </div>
+</div>
+
+<!-- Courses Section -->
+<section class="courses-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>📚 Courses Enrolled</h2>
+      <a href="#" class="view-all">My learning →</a>
+    </div>
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-icon">🕊️</div>
+        <h3>Peacebuilding 101</h3>
+        <p>Foundations of conflict resolution & community healing.</p>
+        <div class="course-progress"><div class="progress-bar" style="width: 65%"></div></div>
+        <span>65% completed</span>
+        <button class="btn-continue" onclick="alert('✨ Course content coming soon!')">Continue Learning →</button>
+      </div>
+      <div class="course-card">
+        <div class="course-icon">🌍</div>
+        <h3>Global Peace Initiatives</h3>
+        <p>Case studies from successful peace movements worldwide.</p>
+        <div class="course-progress"><div class="progress-bar" style="width: 30%"></div></div>
+        <span>30% completed</span>
+        <button class="btn-continue" onclick="alert('✨ Course content coming soon!')">Continue Learning →</button>
+      </div>
+      <div class="course-card">
+        <div class="course-icon">💬</div>
+        <h3>Mediation & Dialogue</h3>
+        <p>Practical skills for facilitating difficult conversations.</p>
+        <div class="course-progress"><div class="progress-bar" style="width: 90%"></div></div>
+        <span>90% completed</span>
+        <button class="btn-continue" onclick="alert('✨ Course content coming soon!')">Continue Learning →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Magazine Section -->
+<section class="magazine-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>📖 Peace Magazine</h2>
+      <a href="#" class="view-all">Latest issues →</a>
+    </div>
+    <div class="magazine-grid">
+      <article class="magazine-card">
+        <div class="magazine-date">March 2025</div>
+        <h3>Stories of Hope from Tigray</h3>
+        <p>Community-led reconciliation efforts are changing lives, one dialogue at a time.</p>
+        <a href="#" class="read-more" onclick="alert('📖 Full article coming soon!'); return false;">Read Full Story →</a>
+      </article>
+      <article class="magazine-card">
+        <div class="magazine-date">February 2025</div>
+        <h3>The Art of Nonviolence</h3>
+        <p>How creative expression becomes a tool for peace — murals, poetry, and resistance.</p>
+        <a href="#" class="read-more" onclick="alert('📖 Full article coming soon!'); return false;">Read Full Story →</a>
+      </article>
+      <article class="magazine-card">
+        <div class="magazine-date">January 2025</div>
+        <h3>Youth Leading Change</h3>
+        <p>Young peacebuilders reshaping their communities across East Africa.</p>
+        <a href="#" class="read-more" onclick="alert('📖 Full article coming soon!'); return false;">Read Full Story →</a>
+      </article>
+    </div>
+    <div style="text-align: center;">
+      <a href="#" class="btn-archive" onclick="alert('📚 Full archive coming soon!'); return false;">View Full Archive →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>✧ Book for Peace</h3>
+      <p>We do not wait for peace.<br>We make it. Together.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#">Sky Canvas</a></li>
+          <li><a href="#">Share Peace</a></li>
+          <li><a href="#">Recent Lights</a></li>
+          <li><a href="#">Time Capsule</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="#">Courses Enrolled</a></li>
+          <li><a href="#">Peace Magazine</a></li>
+          <li><a href="#">Resources</a></li>
+          <li><a href="#">Workshops</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Get Involved</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Book for Peace — cultivating harmony, one story at a time.</p>
+    <div class="social-links">
+      <a href="#">🐦 Twitter</a>
+      <a href="#">📷 Instagram</a>
+      <a href="#">👍 Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Selam AI Chatbot -->
+<div class="chatbot-button" id="chatbotButton">
+  <img src="https://via.placeholder.com/56/2c5a5a/ffffff?text=🌿" alt="Selam" class="selam-avatar">
+</div>
+
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <h3>
+      <img src="https://via.placeholder.com/32/2c5a5a/ffffff?text=🌿" alt="Selam" class="header-avatar">
+      Selam AI
+      <span class="ai-badge">✨ Peace Guide</span>
+    </h3>
+    <button class="close-chat" id="closeChat">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot">
+      <img src="https://via.placeholder.com/32/2c5a5a/ffffff?text=🌿" alt="Selam" class="bot-avatar">
+      <div class="message-content">✨ Selam! I'm Selam, your Peace Guide. I'm here to listen, support, and help you share peace. What's on your heart today? 💫</div>
+    </div>
+  </div>
+  <div class="quick-replies">
+    <button class="quick-reply" data-msg="I want to share a peace message">🕊️ Share Peace</button>
+    <button class="quick-reply" data-msg="Tell me about courses">📚 Courses</button>
+    <button class="quick-reply" data-msg="Give me a peace quote">💫 Peace Quote</button>
+    <button class="quick-reply" data-msg="I need emotional support">🌿 Support</button>
+  </div>
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="Type your message..." rows="1"></textarea>
+    <button class="send-btn" id="sendBtn">Send</button>
+  </div>
+  <div class="api-warning">🌟 Selam AI — Your peaceful companion. Always here for you.</div>
+</div>
+
+<script>
+  // ========== PEACE SUBMISSIONS ==========
+  let submissions = JSON.parse(localStorage.getItem('peaceSubmissions') || '[]');
+  
+  // Character counter
+  document.querySelectorAll('.form-textarea').forEach(textarea => {
+    const counter = textarea.parentElement.querySelector('.char-count');
+    textarea.addEventListener('input', function() {
+      counter.textContent = `${this.value.length} / 1000`;
+    });
+  });
+  
+  // Handle submission
+  function handleSubmission(event, category) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.querySelector('.form-input').value.trim() || 'Anonymous';
+    const message = form.querySelector('.form-textarea').value.trim();
+    const feedback = form.querySelector('.submission-feedback');
+    
+    if (!message) {
+      feedback.textContent = '💌 Please share your message before submitting.';
+      feedback.style.color = '#c97e2c';
+      return;
+    }
+    
+    const submission = {
+      id: Date.now(),
+      category,
+      name,
+      message,
+      timestamp: new Date().toLocaleString()
+    };
+    
+    submissions.unshift(submission);
+    if (submissions.length > 20) submissions.pop();
+    localStorage.setItem('peaceSubmissions', JSON.stringify(submissions));
+    
+    form.querySelector('.form-input').value = '';
+    form.querySelector('.form-textarea').value = '';
+    feedback.textContent = '✨ Your peace offering has been saved! It appears in Recent Lights. ✨';
+    feedback.style.color = '#4a9e6e';
+    setTimeout(() => feedback.textContent = '', 4000);
+    updateRecentLights();
+  }
+  
+  function updateRecentLights() {
+    const container = document.getElementById('recent-lights-container');
+    if (!container) return;
+    
+    if (submissions.length === 0) {
+      container.innerHTML = '<div class="light-item">✨ Be the first to share peace!</div>';
+      return;
+    }
+    
+    const recent = submissions.slice(0, 5);
+    container.innerHTML = recent.map(sub => {
+      const preview = sub.message.length > 50 ? sub.message.substring(0, 50) + '...' : sub.message;
+      return `<div class="light-item">${getIconForCategory(sub.category)} <strong>${escapeHtml(sub.name)}</strong>: “${escapeHtml(preview)}”</div>`;
+    }).join('');
+  }
+  
+  function getIconForCategory(category) {
+    const icons = {
+      'Personal': '👤',
+      'Couple': '💑',
+      'Family': '👨👩👧👦',
+      'Group': '👥',
+      'Time Capsule': '⭐'
+    };
+    return icons[category] || '🕊️';
+  }
+  
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  function viewAllSubmissions() {
+    if (submissions.length === 0) {
+      alert('No submissions yet. Be the first to share peace!');
+    } else {
+      let message = `📖 ${submissions.length} peace messages shared:\n\n`;
+      submissions.forEach((sub, i) => {
+        message += `${i+1}. [${sub.category}] ${sub.name}: ${sub.message.substring(0, 80)}${sub.message.length > 80 ? '...' : ''}\n`;
+      });
+      alert(message.length > 2000 ? message.substring(0, 2000) + '\n\n... and more' : message);
+      console.table(submissions);
+    }
+  }
+  
+  updateRecentLights();
+  
+  // ========== SELAM AI CHATBOT ==========
+  function guideResponse(userMessage) {
+    const msg = userMessage.toLowerCase();
+    
+    if (msg.includes('share') || msg.includes('peace message')) {
+      return "🕊️ I'd love to help you share peace. Choose a card above (Personal, Couple, Family, Group, or Time Capsule) and write what's in your heart. Your words become light for others.";
+    } else if (msg.includes('course') || msg.includes('learn')) {
+      return "📚 We have 3 courses: Peacebuilding 101 (65% complete), Global Peace Initiatives (30%), and Mediation & Dialogue (90%). Which would you like to know more about?";
+    } else if (msg.includes('quote')) {
+      const quotes = [
+        "🕊️ 'Peace is not absence of conflict, it is the ability to handle conflict by peaceful means.' — Ronald Reagan",
+        "✨ 'We do not wait for peace. We make it.' — Book for Peace",
+        "🌱 'When the power of love overcomes the love of power, the world will know peace.' — Jimi Hendrix",
+        "💫 'Selam begins within. Nurture your heart, and peace will follow.' — Selam AI"
+      ];
+      return quotes[Math.floor(Math.random() * quotes.length)];
+    } else if (msg.includes('support') || msg.includes('sad') || msg.includes('help')) {
+      return "🌿 I hear you. Take a gentle breath. Would you like to share what's on your mind? Writing can be healing. I'm here to listen.";
+    } else if (msg.includes('magazine')) {
+      return "📖 Our latest magazine features Stories of Hope from Tigray, The Art of Nonviolence, and Youth Leading Change. Would you like a summary of any article?";
+    } else {
+      return "🙏 Thank you for reaching out. Would you like to share a peace message, explore our courses, or hear an inspiring quote? I'm here for you.";
+    }
+  }
+  
+  // Chat UI
+  const chatWindow = document.getElementById('chatbotWindow');
+  const chatButton = document.getElementById('chatbotButton');
+  const closeChat = document.getElementById('closeChat');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+  
+  chatButton.addEventListener('click', () => chatWindow.classList.add('open'));
+  closeChat.addEventListener('click', () => chatWindow.classList.remove('open'));
+  
+  function addMessage(text, isUser) {
+    const div = document.createElement('div');
+    div.className = `message ${isUser ? 'user' : 'bot'}`;
+    
+    if (!isUser) {
+      div.innerHTML = `<img src="https://via.placeholder.com/32/2c5a5a/ffffff?text=🌿" class="bot-avatar"><div class="message-content">${text}</div>`;
+    } else {
+      div.innerHTML = `<div class="message-content">${text}</div>`;
+    }
+    
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  function showTyping() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message bot';
+    typingDiv.id = 'typingIndicator';
+    typingDiv.innerHTML = `<img src="https://via.placeholder.com/32/2c5a5a/ffffff?text=🌿" class="bot-avatar"><div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span> Selam is listening...</div>`;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  function removeTyping() {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+  }
+  
+  async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+    
+    addMessage(message, true);
+    chatInput.value = '';
+    
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      addMessage(guideResponse(message), false);
+    }, 600);
+  }
+  
+  sendBtn.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  
+  // Quick reply buttons
+  document.querySelectorAll('.quick-reply').forEach(btn => {
+    btn.addEventListener('click', () => {
+      chatInput.value = btn.getAttribute('data-msg');
+      sendMessage();
+    });
+  });
+  
+  // Auto-resize textarea
+  chatInput.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+  });
+</script>
+</body>
+</html>
